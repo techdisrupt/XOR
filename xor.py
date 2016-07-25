@@ -6,7 +6,7 @@
 ### Usage: {Activation: Sigmoidal, Cost: [ACE, MSE]}                          ### 
 ###        {Activation: Tanh, Cost: [MSE]}                                    ### 
 ### 									      ### 
-### Copyright Epoch Ventures 2016                                             ### 
+### Copyright Brett 2016                                                      ### 
 #################################################################################
 
 
