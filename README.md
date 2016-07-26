@@ -30,14 +30,14 @@ In order to learn anything, we need a training set. In the case of XOR, we only 
 
 We store these combinations as our reference training set:
 
-*`X = [[0, 0],[0, 1],[1, 0],[1, 1]]`
-*`Y = [[0], [1], [1], [0]]`
+* `X = [[0, 0],[0, 1],[1, 0],[1, 1]]`
+* `Y = [[0], [1], [1], [0]]`
 
 ### Specifying the neural network structure
 
-*`N_INPUT_NODES = 2`
-*`N_HIDDEN_NODES = 5`
-*`N_OUTPUT_NODES  = 1`
+* `N_INPUT_NODES = 2`
+* `N_HIDDEN_NODES = 5`
+* `N_OUTPUT_NODES  = 1`
 
 ### Variables? Placeholders?
 
