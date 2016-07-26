@@ -20,11 +20,13 @@ Simply ensure that tensorflow is in your environment and then run:
 
 In order to learn anything, we need a training set. In the case of XOR, we only have two binary inputs, which means that we only have four cases to consider. The XOR function looks like this:
 
-X0 X1 Y
-0  0  0
-0  1  1
-1  0  1
-1  1  0
+| X0 | X1 | Y |
+---- |--- |---|
+0    | 0  | 0 |
+0    | 1  | 1 |
+1    | 0  | 1 |
+1    | 1  | 0 |
+
 
 We store these combinations as our reference training set:
 
