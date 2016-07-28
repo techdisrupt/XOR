@@ -83,7 +83,7 @@ Another popular cost function is the Average Cross Entropy. We wont discuss it h
 
 The input nodes do not have to match the number of nodes in the hidden. Experiment by changing the number of hidden nodes.
 
-* `N_HIDDEN_NODES = 5`
+* `N_HIDDEN_NODES = 5` Experiment with the number of hidden nodes, by just changing this one parameter. You don't need to make any changes elsewhere in the code.
 
 
 
