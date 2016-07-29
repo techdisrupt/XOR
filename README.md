@@ -67,15 +67,19 @@ Feed forward neural networks get their name from their behaviour. The idea is th
 
 The NN needs to be trained before it can do something useful. The term back propogation is often employed to describe how we perform the training. Training works by figuring out the error at the output and update the weights between the nodes, according to this error. One of the breakthroughs of the backpropogation technique is how that error is pushed towards the input layer in a way that it means that earlier nodes can also update their weights based on errors at a later layer.
 
+### How do we know when the Neural Network has learnt its training examples?
+
+We need to somehow score the training of the neural network to check it has learnt suffuciently well. We loop over our tranining examples and compute the inference and compare with the desired output. We build a score, or a cost function that helps us measure how far we away. There are a few methodologies for these cost functions with their own merits, but the common cost functions are MSE and ACE.
+
 ### Training the Neural Network
 
 In order to determine whether the neural network has learnt it's input patterns, a cost function is employed to evaluate how different the predictions from the neural network are compared with the actual training data (Y). The cost function can take many forms. Perhaps the simplist and most robust function is the MSE or the mean squared estimation. It literally takes the difference between the predicted output and the training value for that set of inputs. 
 
-`cost = tf.reduce_mean(tf.square(Y - output))` Mean Squared Estimate
+`cost = tf.reduce_mean(tf.square(Y - output))` Mean Squared Estimate (MSE)
 
 Another popular cost function is the Average Cross Entropy. We wont discuss it here, but you can use see this cost here:
 
-`cost = - tf.reduce_mean( (y_ * tf.log(output)) + (1 - y_) * tf.log(1.0 - output) )` 
+`cost = - tf.reduce_mean( (y_ * tf.log(output)) + (1 - y_) * tf.log(1.0 - output) )` (ACE)
 
 ## Experiments with a neural network
 
@@ -83,7 +87,17 @@ Another popular cost function is the Average Cross Entropy. We wont discuss it h
 
 The input nodes do not have to match the number of nodes in the hidden. Experiment by changing the number of hidden nodes.
 
-* `N_HIDDEN_NODES = 5` Experiment with the number of hidden nodes, by just changing this one parameter. You don't need to make any changes elsewhere in the code.
+* `N_HIDDEN_NODES = 5` Experiment with the number of hidden nodes, by just changing this one parameter. You don't need to make any changes elsewhere in the code. Look at the learning rate.
+
+### Introduce some noise in the training data
+
+So far our example uses nice perfect training data. Why did we even bother with a neural network for this simple pattern in the first place? We could have just used some simple logic to determine the output in a couple of lines of python. But we're not seeing the real power of the Neural Network, which is be able to learn patterns from noisy data. We keep the same training - i.e. the XOR but we add some random noise to both the inputs and the outputs. The function `rand01(digit)` adds random noise to 0 and 1, but always the output will be between 0 and 1 preserving the original pattern.
+
+### Change the activation function
+
+Try swapping the activation function from sigma and tanh and explore! Don't forget the output range might change.
+
+
 
 
 
