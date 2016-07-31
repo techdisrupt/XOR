@@ -15,7 +15,7 @@ import numpy as np
 
 def rand01(digit):
 	# Add some random noise to bits, but keep always between 0 and 1
-	s = abs(np.random.normal(0.0, 0.1))
+	s = abs(np.random.normal(0.0, 0.05))
 	if digit == 0:
 		noise = digit + s
 	else:
@@ -42,7 +42,10 @@ N_TRAINING = len(X)
 
 N_INPUT_NODES = 2
 N_HIDDEN_NODES = 5
-N_OUTPUT_NODES  = 1 
+N_OUTPUT_NODES  = 1
+ACTIVATION = 'tanh' # sigmoid or tanh
+COST = 'ACE' # MSE or ACE
+LEARNING_RATE = 0.05
 
 if __name__ == '__main__':
 
@@ -61,25 +64,37 @@ if __name__ == '__main__':
 	bias1 = tf.Variable(tf.zeros([N_HIDDEN_NODES]), name="bias1")
 	bias2 = tf.Variable(tf.zeros([N_OUTPUT_NODES]), name="bias2")
 
-	### Use a sigmoidal activation function ###
 
-	layer1 = tf.sigmoid(tf.matmul(x_, theta1) + bias1)
-	output = tf.sigmoid(tf.matmul(layer1, theta2) + bias2)
+	if ACTIVATION == 'sigmoid':
 
-	### Use tanh activation function ###
+		### Use a sigmoidal activation function ###
 
-	#layer1 = tf.tanh(tf.matmul(x_, theta1) + bias1)
-	#output = tf.tanh(tf.matmul(layer1, theta2) + bias2)
+		layer1 = tf.sigmoid(tf.matmul(x_, theta1) + bias1)
+		output = tf.sigmoid(tf.matmul(layer1, theta2) + bias2)
 
-	# Mean Squared Estimate - the simplist cost function (MSE)
+	else:
+		### Use tanh activation function ###
 
-	cost = tf.reduce_mean(tf.square(Y - output)) 
-	train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+		layer1 = tf.tanh(tf.matmul(x_, theta1) + bias1)
+		output = tf.tanh(tf.matmul(layer1, theta2) + bias2)
 	
-	# Average Cross Entropy - better behaviour and learning rate
+		output = tf.add(output, 1)
+		output = tf.mul(output, 0.5)
 
-	#cost = - tf.reduce_mean( (y_ * tf.log(output)) + (1 - y_) * tf.log(1.0 - output)  )
-	#train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+	
+	if COST == "MSE":
+
+		# Mean Squared Estimate - the simplist cost function (MSE)
+
+		cost = tf.reduce_mean(tf.square(Y - output)) 
+		train_step = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(cost)
+	
+	else:
+		# Average Cross Entropy - better behaviour and learning rate
+
+		
+		cost = - tf.reduce_mean( (y_ * tf.log(output)) + (1 - y_) * tf.log(1.0 - output)  )
+		train_step = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(cost)
 
 
 
@@ -94,7 +109,7 @@ if __name__ == '__main__':
 			print('Batch ', i)
 			print('Inference ', sess.run(output, feed_dict={x_: X, y_: Y}))
 			print('Cost ', sess.run(cost, feed_dict={x_: X, y_: Y}))
-
+			#print('op: ', sess.run(output))
 
 	
 
