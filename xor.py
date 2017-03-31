@@ -79,7 +79,7 @@ if __name__ == '__main__':
 		output = tf.tanh(tf.matmul(layer1, theta2) + bias2)
 	
 		output = tf.add(output, 1)
-		output = tf.mul(output, 0.5)
+		output = tf.multiply(output, 0.5)
 
 	
 	if COST == "MSE":
